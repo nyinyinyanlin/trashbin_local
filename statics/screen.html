@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+body {
+  font-size: 0;
+}
+#message {
+  width: 100%;
+  height: 20vh;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  color: red;
+  text-align: center;
+  font-weight: bold;
+  font-size:7rem;
+  vertical-align: middle;
+  display: none;
+}
+</style>
+</head>
+<body>
+  <video id="player" width="1280px" height="720px" autoplay muted>
+  </video>
+  <p id="message">
+    WINNER
+  </p>
+  <script src="/socket.io/socket.io.js"></script>
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  <script>
+  var socket = io(window.location.href);
+  var playlist = [];
+  var index = 0;
+  socket.on('connect', function(){
+  });
+  socket.on('playlist',function(data){
+    playlist = data.playlist;
+    playVideo(index);
+  });
+  socket.on('win',function(){
+    $("#message").fadeIn(1000);
+  });
+  socket.on('clear',function(){
+    $("#message").fadeOut(1000);
+  });
+  var playVideo = function(index){
+    $("#player").get(0).pause();
+    $("#player").attr('src',window.location.href+"assets/"+playlist[index]);
+    $("#player").get(0).load();
+  }
+  document.getElementById('player').addEventListener("ended",function(){
+        index++;
+        if (index == playlist.length){
+          index = 0;
+        }
+        playVideo(index);
+      },false);
+  $(document).on('ready',function(){
+  });
+  </script>
+</body>
+</html>

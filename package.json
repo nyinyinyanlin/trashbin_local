@@ -1,0 +1,24 @@
+{
+  "name": "trashbin_local",
+  "version": "1.0.0",
+  "description": "\"Local display server for trash bin project.\"",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nyinyinyanlin/trashbin_local.git"
+  },
+  "author": "Nyi Nyi Nyan Lin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nyinyinyanlin/trashbin_local/issues"
+  },
+  "homepage": "https://github.com/nyinyinyanlin/trashbin_local#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "socket.io": "^2.2.0"
+  }
+}
