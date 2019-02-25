@@ -4,6 +4,7 @@ const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 const path = require('path');
 const fs = require('fs');
+var Sound = require('aplay');
 const port = 8000;
 var video_list = [];
 
@@ -23,6 +24,11 @@ io.on('connection', function(client){
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname+ '/statics/screen.html'));
 });
+
+app.get('/sound', function(req,res){
+  new Sound().play('/assets/cocacola.ogg');
+  res.sendStatus(200);
+})
 
 app.get('/win', function (req,res){
   io.emit("win",[]);
