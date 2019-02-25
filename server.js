@@ -26,7 +26,8 @@ app.get('/', function (req, res) {
 });
 
 app.get('/sound', function(req,res){
-  new Sound().play('/assets/cocacola.ogg');
+  new Sound().play('assets/audio/cocacola.wav');
+  console.log("Played sound");
   res.sendStatus(200);
 })
 
